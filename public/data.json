@@ -1,0 +1,150 @@
+[
+    {
+      "_id": "1",
+      "brand_name": "Daraz",
+      "rating": 4.8,
+      "description": "One of the largest online marketplaces in Bangladesh.",
+      "brand_logo": "https://i.ibb.co.com/ydKtXQK/Daraz-Logo.png",
+      "coupons": [
+        {
+          "coupon_code": "DARAZ15",
+          "description": "15% discount on all products",
+          "expiry_date": "2024-12-31",
+          "condition": "Maximum discount 200 BDT",
+          "coupon_type": "Flat"
+        },
+        {
+          "coupon_code": "FREESHIP",
+          "description": "Free shipping on orders above 1000 BDT",
+          "expiry_date": "2024-11-30",
+          "condition": "Applicable on select products",
+          "coupon_type": "Shipping"
+        }
+      ],
+      "shop_Link": "https://www.daraz.com.bd",
+      "category": "E-commerce",
+      "isSaleOn": true
+    },
+    {
+      "_id": "2",
+      "brand_name": "Evaly",
+      "rating": 4.5,
+      "description": "Popular e-commerce platform for a variety of products.",
+      "brand_logo": "https://i.ibb.co.com/yhYjqxv/Evaly-logo-svg.png",
+      "coupons": [
+        {
+          "coupon_code": "EVALY20",
+          "description": "20% off on electronics",
+          "expiry_date": "2024-12-15",
+          "condition": "Max discount 500 BDT",
+          "coupon_type": "Flat"
+        }
+      ],
+      "shop_Link": "https://www.evaly.com.bd",
+      "category": "Electronics",
+      "isSaleOn": true
+    },
+    {
+      "_id": "3",
+      "brand_name": "Foodpanda",
+      "rating": 4.7,
+      "description": "Fast and reliable food delivery service.",
+      "brand_logo": "https://i.ibb.co.com/mJ5Sb1w/Foodpanda-logo-since-2017.png",
+      "coupons": [
+        {
+          "coupon_code": "FOODIE10",
+          "description": "10% off on your first order",
+          "expiry_date": "2024-11-30",
+          "condition": "New users only",
+          "coupon_type": "Flat"
+        },
+        {
+          "coupon_code": "PANDA50",
+          "description": "50% off on selected restaurants",
+          "expiry_date": "2024-12-10",
+          "condition": "Max discount 100 BDT",
+          "coupon_type": "Percentage"
+        }
+      ],
+      "shop_Link": "https://www.foodpanda.com.bd",
+      "category": "Food Delivery",
+      "isSaleOn": false
+    },
+    {
+      "_id": "4",
+      "brand_name": "Pickaboo",
+      "rating": 4.4,
+      "description": "Trusted store for gadgets and accessories.",
+      "brand_logo": "https://i.ibb.co.com/fv43Rg6/download.png",
+      "coupons": [
+        {
+          "coupon_code": "PICK100",
+          "description": "100 BDT off on accessories",
+          "expiry_date": "2024-11-20",
+          "condition": "Minimum order 1000 BDT",
+          "coupon_type": "Flat"
+        }
+      ],
+      "shop_Link": "https://www.pickaboo.com",
+      "category": "Electronics",
+      "isSaleOn": true
+    },
+    {
+      "_id": "5",
+      "brand_name": "Pathao Food",
+      "rating": 4.6,
+      "description": "Popular food delivery service in Bangladesh.",
+      "brand_logo": "https://i.ibb.co.com/wWFkZ2M/download.png",
+      "coupons": [
+        {
+          "coupon_code": "FOOD5",
+          "description": "5% off on all orders",
+          "expiry_date": "2024-12-01",
+          "condition": "No minimum order required",
+          "coupon_type": "Flat"
+        }
+      ],
+      "shop_Link": "https://www.pathao.com",
+      "category": "Food Delivery",
+      "isSaleOn": false
+    },
+    {
+      "_id": "6",
+      "brand_name": "Chaldal",
+      "rating": 4.9,
+      "description": "Convenient online grocery shopping in Bangladesh.",
+      "brand_logo": "https://i.ibb.co.com/hC81hxr/download.jpg",
+      "coupons": [
+        {
+          "coupon_code": "GROCERY50",
+          "description": "50 BDT off on grocery orders",
+          "expiry_date": "2024-11-25",
+          "condition": "Minimum order 500 BDT",
+          "coupon_type": "Flat"
+        }
+      ],
+      "shop_Link": "https://www.chaldal.com",
+      "category": "Grocery",
+      "isSaleOn": true
+    },
+    {
+      "_id": "7",
+      "brand_name": "Rokomari",
+      "rating": 4.8,
+      "description": "Bangladesh's largest online bookstore.",
+      "brand_logo": "https://i.ibb.co.com/Wg3wtSB/Rokomari-com-Monogram-svg.png",
+      "coupons": [
+        {
+          "coupon_code": "BOOKLOVER",
+          "description": "15% off on all books",
+          "expiry_date": "2024-12-31",
+          "condition": "No minimum order required",
+          "coupon_type": "Percentage"
+        }
+      ],
+      "shop_Link": "https://www.rokomari.com",
+      "category": "Books",
+      "isSaleOn": true
+    }
+  ]
+  
