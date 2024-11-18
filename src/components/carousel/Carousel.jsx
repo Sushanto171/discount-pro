@@ -12,7 +12,7 @@ const  ComCarousel=() => {
                     {/* <p className="legend">Legend 1</p> */}
                 </div>
                 <div>
-                    <img src={photo1} />
+                    <img src={photo3} />
                     {/* <p className="legend">Legend 1</p> */}
                 </div>
                 <div>

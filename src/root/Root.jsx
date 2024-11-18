@@ -6,6 +6,7 @@ import Brands from "../Pages/Brands/Brands";
 import AboutDev from "../Pages/AboutDev/AboutDev";
 import Profile from './../Pages/Profile/Profile';
 import TopBrands from "../components/TopBrands/TopBrands";
+import Brand from "../Pages/Brand/Brand";
 
 const router = createBrowserRouter([
     {
@@ -25,8 +26,12 @@ const router = createBrowserRouter([
                 element:<TopBrands />
             },
             {
-                path: "/brands/:name",
+                path: "/brands",
                 element: <Brands />
+            },
+            {
+                path: "/brand/:name",
+                element: <Brand />
             },
             {
                 path: "/about-dev",

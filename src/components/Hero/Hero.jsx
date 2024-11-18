@@ -24,11 +24,14 @@ const Hero = () => {
                 </h1>
                 <p className="mt-5 text-white opacity-80">Discover the best deals, discounts, and coupons to make your shopping smarter and more affordable. Start saving today!</p>
 
-                <Link href="#" title="" className="inline-flex items-center px-6 py-4 mt-8 font-semibold text-white transition-all duration-200 bg-blue-600 rounded-lg sm:mt-16 hover:bg-blue-700 focus:bg-blue-700" role="button">
-              See More
+                <Link to className="w-44  items-center px-6 py-4 mt-8 font-bold text-black transition-all duration-200
+                 bg-amber-400 hover:bg-amber-500 rounded-lg sm:mt-16 focus:bg-amber-500  inline-block" role="button">
+                    <div className="w-full h-full flex gap-2 hover:gap-4 duration-200">
+                    <span>See More</span> 
                     <svg className="w-6 h-6 ml-4 -mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
+                    </div>
                 </Link>
             </div> 
             </div>
