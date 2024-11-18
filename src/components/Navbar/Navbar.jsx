@@ -74,8 +74,8 @@ const Navbar = () => {
                 <h4>Hi, jone</h4>
             </div>
             <div className="flex items-center ">
-                <Link className="btn btn-outline hover:bg-amber-400 hover:border-amber-400 rounded-none">Log in</Link>
-                <Link className=" ml-2 btn btn-outline hover:bg-amber-400 hover:border-amber-400 rounded-none text-white bg-[#0056D2]">Sign Up</Link>
+                <Link to="/login" className="btn btn-outline hover:bg-amber-400 hover:border-amber-400 rounded-none">Log in</Link>
+                <Link to="/signup" className=" ml-2 btn btn-outline hover:bg-amber-400 hover:border-amber-400 rounded-none text-white bg-[#0056D2]">Sign Up</Link>
             </div>
             </div>
             </div>

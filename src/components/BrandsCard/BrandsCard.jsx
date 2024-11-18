@@ -1,12 +1,20 @@
 /* eslint-disable react/prop-types */
-
+import { useContext } from "react";
 import { FaStar } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
+import { AuthContext } from "../../Hooks/AuthContext";
 
 const BrandsCard = ({brand}) => {
     const {brand_logo, brand_name, description, rating,isSaleOn} =brand;
-
+    const {user} = useContext(AuthContext);
+    const navigate = useNavigate();
     const handleViewCoupons = ()=>{
         console.log("button clicked")
+        if(user){
+            navigate(`/brand/${brand._id}`)
+        }else{
+            navigate(`/login`)
+        }
     }
     return (
 <div>

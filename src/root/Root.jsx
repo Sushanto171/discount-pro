@@ -7,6 +7,8 @@ import AboutDev from "../Pages/AboutDev/AboutDev";
 import Profile from './../Pages/Profile/Profile';
 import TopBrands from "../components/TopBrands/TopBrands";
 import Brand from "../Pages/Brand/Brand";
+import Login from "../Pages/Login/Login";
+import SignUp from "../Pages/SignUp/SignUp";
 
 const router = createBrowserRouter([
     {
@@ -21,7 +23,7 @@ const router = createBrowserRouter([
                 element: <Home />
             },
             {
-                path: "/:id",
+                path: "/",
                 loader: ()=> fetch("../data.json"),
                 element:<TopBrands />
             },
@@ -43,6 +45,14 @@ const router = createBrowserRouter([
                 element: <Profile />
             }
         ]
+    },
+    {
+        path: "/login",
+        element: <Login />
+    },
+    {
+        path: "/signup",
+        element: <SignUp />
     },
 ]);
 
