@@ -1,11 +1,13 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import SellOnCard from "../sellOnCard/SellOnCard";
 import 'animate.css';
+import { AuthContext } from "../../Hooks/AuthContext";
 const BrandOnSell = (props) => {
     const {isSellOn: brands} = props || [];
 const [isVisible, setIsVisible] = useState(false);
 const textRef = useRef();
+const {branOnSellRef} = useContext(AuthContext);
 useEffect(()=>{
     const observer = new IntersectionObserver(
         ([entry])=>{
@@ -25,7 +27,7 @@ useEffect(()=>{
 },[])
 
     return (
-        <div>
+        <div ref={branOnSellRef}>
             <h3 ref={textRef} className={`font-bold text-xl md:text-2xl text-center uppercase
                  ${isVisible ? "animate__animated animate__fadeInDown animate__delay-1s": ""} `}>Brands On Sell</h3>
                  <hr ref={textRef} className={`border-black w-1/2 md:w-3/12 mt-2 mx-auto ${isVisible ? "animate__animated animate__fadeInTopLeft animate__delay-1s": ""}`}></hr>

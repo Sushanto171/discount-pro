@@ -1,9 +1,18 @@
 
-import { Link } from "react-router-dom";
 import ComCarousel from "../carousel/Carousel";
 import "./hero.css"
+import { useContext } from "react";
+import { AuthContext } from "../../Hooks/AuthContext";
+
 
 const Hero = () => {    
+    const {branOnSellRef} = useContext(AuthContext);
+
+    const seeMoreHandler = ()=>{
+        if(branOnSellRef.current){
+            branOnSellRef.current.scrollIntoView({behavior: "smooth"});
+        }
+    }
     return (
         <div className='bg-hero lg:bg-no-repeat '>
     <section className="w-10/12 mx-auto relative pt-10 pb-16">
@@ -24,7 +33,7 @@ const Hero = () => {
                 </h1>
                 <p className="mt-5 text-white opacity-80">Discover the best deals, discounts, and coupons to make your shopping smarter and more affordable. Start saving today!</p>
 
-                <Link to className="w-44  items-center px-6 py-4 mt-8 font-bold text-black transition-all duration-200
+                <button onClick={seeMoreHandler} to="/" className="w-44  items-center px-6 py-4 mt-8 font-bold text-black transition-all duration-200
                  bg-amber-400 hover:bg-amber-500 rounded-lg sm:mt-16 focus:bg-amber-500  inline-block" role="button">
                     <div className="w-full h-full flex gap-2 hover:gap-4 duration-200">
                     <span>See More</span> 
@@ -32,7 +41,7 @@ const Hero = () => {
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="1.5" d="M13 9l3 3m0 0l-3 3m3-3H8m13 0a9 9 0 11-18 0 9 9 0 0118 0z" />
                     </svg>
                     </div>
-                </Link>
+                </button>
             </div> 
             </div>
         </div>

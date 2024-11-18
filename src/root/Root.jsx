@@ -21,12 +21,13 @@ const router = createBrowserRouter([
                 element: <Home />
             },
             {
-                path: "/",
-                loader: ()=> fetch("../../public/data.json"),
+                path: "/:id",
+                loader: ()=> fetch("../data.json"),
                 element:<TopBrands />
             },
             {
                 path: "/brands",
+                loader: ()=> fetch("../data.json"),
                 element: <Brands />
             },
             {
