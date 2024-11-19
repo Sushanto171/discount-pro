@@ -177,11 +177,11 @@ const SignUp = () => {
                 <div className="form-control relative">
                 <input name="password" onChange={passwordOnChangeHandler} onClick={passwordFocusHandler} type={passVisible? "text": "password"} placeholder="password" className="input input-bordered rounded-full" required />
                 <span className="absolute right-5 top-3"><button onClick={passwordVisibilityHandler}>{passVisible? <FaEyeSlash />: <FaEye />}</button></span>
-                {errorMessage && <p className={`text-xs absolute left-4 -bottom-5 text-error`}>{errorMessage} </p> ||
+                {errorMessage && <p className={`text-xs absolute left-4 -bottom-7 sm:-bottom-5 text-error`}>{errorMessage} </p> ||
                 successMessage && <p className={`text-xs absolute left-4 -bottom-5 text-success`}>{successMessage} </p>
                 }
                 </div>
-                 <label className="label cursor-pointer justify-normal gap-2 mt-4">
+                 <label className="label cursor-pointer justify-normal gap-2 mt-6">
                     <input name="terms" type="checkbox" className="checkbox rounded-full w-5 h-5" />
                     <span className="label-text text-xs">Accept terms & conditions</span>
                 </label>
@@ -193,7 +193,7 @@ const SignUp = () => {
             <div className="px-8">
             <div className="divider text-sm">Or Log in</div>
             <div className="flex justify-center gap-5 mb-5">
-            <button onClick={googleSignInHandler} className="btn btn-sm rounded-full "><FcGoogle /></button>
+            <button onClick={googleSignInHandler} className="btn btn-sm rounded-full "><FcGoogle size={20} /></button>
             {/* <button className="btn btn-sm rounded-full"><FaFacebook color="blue" /> </button>
             <button className="btn btn-sm rounded-full"><FaGithub /></button> */}
 

@@ -2,7 +2,7 @@ import { FcAbout } from "react-icons/fc";
 import { IoIosHome } from "react-icons/io";
 import { MdProductionQuantityLimits } from "react-icons/md";
 import { RxAvatar } from "react-icons/rx";
-import { Link, NavLink, useNavigate } from "react-router-dom";
+import { Link, NavLink, useLocation, useNavigate } from "react-router-dom";
 import logo from "../../assets/logo.png"
 import { useContext } from "react";
 import { AuthContext } from "../../Hooks/AuthContext";
@@ -10,8 +10,9 @@ import {  RiBarChartHorizontalLine } from "react-icons/ri";
 import Swal from "sweetalert2";
 
 const Navbar = () => {
-    const {user, firstName, userSignOut, photo} = useContext(AuthContext);
+    const {user, firstName, userSignOut, photo, setPhoto, setFirstName} = useContext(AuthContext);
     const navigate = useNavigate();
+    const {pathname} = useLocation();
 
 
     const links =(
@@ -27,7 +28,9 @@ const Navbar = () => {
     const signOutHandler = ()=>{
         userSignOut()
         .then(()=> {navigate("/login")
-            successAlert("Sign out success!")
+            successAlert("Sign out success!");
+            setPhoto("");
+            setFirstName("");
         });
     };
 
@@ -65,7 +68,7 @@ const Navbar = () => {
                <img src={logo} alt="" className=" w-12" />
                <div className="flex flex-col">
                <h2 className="font-bold text-lg">Coupon Oasis</h2>
-               <p className="text-xs">collect & save</p>
+               <p className="text-xs">collect & save money</p>
                </div>
                 </span>
                 </Link>
@@ -77,7 +80,7 @@ const Navbar = () => {
                <img src={logo} alt="" className=" w-12" />
                <div className="flex flex-col">
                <h2 className="font-bold text-lg">Coupon Oasis</h2>
-               <p className="text-xs">collect & save</p>
+               <p className="text-xs">collect & save money</p>
                </div>
                 </span>
                 </Link>
@@ -92,11 +95,12 @@ const Navbar = () => {
             {user && user?.photoURL && <Link to="/profile" className="mr-2 shadow rounded-full"><img className="w-10 rounded-full block ring " src={user?.photoURL}/></Link>}
             {photo && <Link to="/profile" className="mr-2 shadow rounded-full"><img className="w-10 rounded-full block ring " src={photo}/></Link>}
             {user && <h4 className="font-semibold ">Hi, {user?.displayName?.slice(0,8)}{user?.displayName?.length > 8 && "..." || firstName }</h4>}
+            {/* {user && user?.email && <span className="text-xs block">{user?.email}</span>} */}
             </div>
             <div className="flex items-center justify-end">
                 {! user? <>
-                <Link to="/login" className="btn btn-outline hover:bg-amber-400 hover:border-amber-400 rounded-none">Log in</Link>
-                <Link to="/signup" className=" ml-2 btn btn-outline hover:bg-amber-400 hover:border-amber-400 rounded-none text-white bg-[#0056D2]">Sign Up</Link>
+                {pathname === "/login" || <Link to="/login" className="btn btn-outline hover:bg-amber-400 hover:border-amber-400 rounded-none">Log in</Link>}
+                {pathname === "/signup" ||<Link to="/signup" className=" ml-2 btn btn-outline hover:bg-amber-400 hover:border-amber-400 rounded-none text-white bg-[#0056D2]">Sign Up</Link>}
                 </> :
                 <>
                 <button onClick={signOutHandler} className=" ml-2 btn btn-outline hover:bg-amber-400 hover:border-amber-400 rounded-none text-white bg-[#0056D2]">Sign out </button>

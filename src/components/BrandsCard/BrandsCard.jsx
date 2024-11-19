@@ -47,15 +47,15 @@ const BrandsCard = ({brand}) => {
           Sale is On!
         </p>
       )}
-      <Link to={`/brand/:${_id}`}>
       <button
         className={`${isSaleOn || "btn-disabled bg-gray-400"} 
         mt-6 w-full px-4 py-2 btn-outline hover:bg-amber-400 focus:border-amber-400 rounded-none
         text-white bg-[#0056D2]  shadow-2xl transition-all`}
         >
+      <Link to={`/brand/${_id}`}>
        {isSaleOn ? " View Coupons":"Not available"}
-      </button>  
           </Link>
+      </button>  
         </div>
     </div>
 

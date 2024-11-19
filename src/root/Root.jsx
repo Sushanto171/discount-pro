@@ -15,7 +15,6 @@ const router = createBrowserRouter([
     {
         path: "/",
         element: <MainLayout />,
-        loader: ()=> fetch("../data.json"),
         errorElement: <Error />,
         children:[
             {
@@ -34,16 +33,16 @@ const router = createBrowserRouter([
                 element: <Brands />
             },
             {
-                path: "/brand/:name",
-                element: <PrivateRoute ><Brand /></PrivateRoute>
-            },
-            {
                 path: "/about-dev",
                 element: <AboutDev />
             },
             {
+                path: "/brand/:id",
+                element: <PrivateRoute ><Brand /></PrivateRoute>
+            },
+            {
                 path: "/profile",
-                element: <Profile />
+                element:<PrivateRoute ><Profile /></PrivateRoute>
             }
         ]
     },

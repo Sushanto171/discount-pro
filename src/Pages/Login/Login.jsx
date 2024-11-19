@@ -50,6 +50,8 @@ const Login = () => {
             inputLabel: "Your email address",
             inputPlaceholder: "Enter your email address",
             confirmButtonText: 'Done',
+            background: "black",
+            color: "white",
           });
           if(email){
             passwordRecovery(email)
@@ -139,7 +141,7 @@ const Login = () => {
                 <div className="form-control relative">
                 <input name="password" type={passVisible? "text": "password"} placeholder="password" className="input input-bordered rounded-full" required />
                 <span className="absolute right-5 top-3"><button onClick={passwordVisibilityHandler}>{passVisible? <FaEyeSlash />: <FaEye />}</button></span>
-                {errorMessage && <p className={`text-xs absolute left-4 -bottom-5 text-error`}>{errorMessage} </p>}
+                {errorMessage && <p className={`text-xs absolute left-4 -bottom-5 text-error`}>{errorMessage ==="Firebase: Error (auth/invalid-credential)."? "Invalid email or password": errorMessage} </p>}
                 </div>
                     <div className="flex justify-between mt-4">
                 <label className="label cursor-pointer justify-normal gap-2">
@@ -158,7 +160,7 @@ const Login = () => {
             <div className="px-8">
             <div className="divider text-sm">OR</div>
             <div className="flex justify-center gap-5 mb-5">
-            <button onClick={googleSignInHandler} className="btn btn-sm rounded-full "><FcGoogle /></button>
+            <button onClick={googleSignInHandler} className="btn btn-sm rounded-full "><FcGoogle  size={20}/></button>
             {/* <button className="btn btn-sm rounded-full"><FaFacebook color="blue" /> </button>
             <button className="btn btn-sm rounded-full"><FaGithub /></button> */}
             </div>

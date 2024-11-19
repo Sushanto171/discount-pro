@@ -11,6 +11,7 @@ const AuthProvider = ({children }) => {
     const [firstName, setFirstName] = useState("");
     const [lastName, setLastName] = useState("");
     const [photo, setPhoto] = useState("");
+    const [loader, setLoader] = useState(true);
 
     // providers
     const googleProvider = new GoogleAuthProvider();
@@ -19,7 +20,8 @@ const AuthProvider = ({children }) => {
     useEffect(()=>{
         const unSubscribe = onAuthStateChanged(auth, (user)=>{
             if(user){
-                setUser(user)
+                setUser(user);
+                setLoader(false);
             }else{
                 setUser(null);
             }
@@ -66,6 +68,7 @@ const passwordRecovery= (email)=>{
         userSignOut,
         photo,
         passwordRecovery,
+        loader,
     }
     return (
        <AuthContext.Provider value={contextInfo}>

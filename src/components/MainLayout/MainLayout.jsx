@@ -1,9 +1,17 @@
-import { Outlet, useLoaderData } from "react-router-dom";
+import { Outlet, } from "react-router-dom";
 import Navbar from "../Navbar/Navbar";
 import Footer from './../Footer/Footer';
+import { useContext } from "react";
+import { AuthContext } from "../../Hooks/AuthContext";
+import { PulseLoader } from "react-spinners";
 
 const MainLayout = () => {
-    const data = useLoaderData();
+    const {loader} = useContext(AuthContext);
+
+    if(loader){
+        return <p className="min-h-screen w-full flex justify-center items-center"><PulseLoader color="#dae21e" /></p>
+    }
+
     return (
         <div>
             <Navbar />
