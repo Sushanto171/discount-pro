@@ -63,8 +63,8 @@ const BrandsCard = ({brand}) => {
         mt-6 w-full px-4 py-2 btn-outline hover:bg-amber-400 focus:border-amber-400 rounded-none
          text-white bg-[#0056D2]  shadow-2xl transition-all`}
         >
-        View Coupons
-      </button>
+       {isSaleOn ? " View Coupons":"Not available"}
+      </button>  
         </div>
     </div>
 

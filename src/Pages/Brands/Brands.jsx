@@ -14,7 +14,8 @@ const Brands = () => {
                 <span className="absolute top-[2.5px] left-[2.5px]  bg-base-300 w-14 h-11 rounded-l-full flex pl-4 justify-start items-center">
                 <FaSearch size={20} />
                 </span>
-                    <input type="search" className="border w-full py-3 pr-[49px] pl-16 rounded-full outline-none border-black shadow-md" />
+                    <input type="search" className="border w-full py-3 pr-[49px] pl-16 rounded-full outline-none border-black shadow-md bg-base-200 border-transparent
+                     focus:bg-white hover:bg-white hover:border-black duration-200" />
                     <button className="absolute right-2 top-2 btn btn-sm rounded-full bg-black/80 hover:bg-black font-semibold text-white w-14 ">Go</button>
                 </div>
                 <div>
