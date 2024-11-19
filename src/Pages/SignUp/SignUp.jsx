@@ -1,27 +1,96 @@
+/* eslint-disable no-unused-vars */
 import { FaEye, FaEyeSlash, FaFacebook, FaGithub } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import signUpBanner from "../../assets/Illustration (1).png"
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Hooks/AuthContext";
 
 const SignUp = () => {
     const [passVisible, setPassVisible] = useState(false);
-    const submitFormHandler = (e)=>{
+    const [errorMessage, setErrorMessage] = useState("");
+    const [successMessage, setSuccessMessage] = useState("");
+    const {createUser, signInWithGoogle, setFirstName, setLastName , setPhoto} = useContext(AuthContext);
+    const navigate = useNavigate();
 
+        const submitFormHandler = (e)=>{
         e.preventDefault();
-        const firstName = e.target.firstName.value;
-        const lastName = e.target.lastName.value;
+
+        setFirstName(e.target.firstName.value);
+         setLastName(e.target.lastName.value);
+        setPhoto(e.target.photo.value);
         const email = e.target.email.value;
         const password = e.target.password.value;
         const terms = e.target.terms.checked;
-        console.log({firstName, lastName, email, password, terms})
 
+        if(errorMessage){
+            alert("follow Requirement")
+            return
+        }
+        if(! terms){
+            alert("Please Accept our terms & conditions");
+            return
+        }
+        
+        // user create
+        createUser(email, password)
+        .then(res => {
+            navigate("/"); 
+        })
+        .catch(error => console.log(error.message))
+
+        e.target.reset();
+        setSuccessMessage('');
     }
 
+    // password visibility 
     const passwordVisibilityHandler =(e)=>{
         e.preventDefault();
         setPassVisible(!passVisible);
+    }
+// with an upper & lower case, and a special character
+    const passwordFocusHandler = (e)=>{
+        e.preventDefault();
+    }
+
+    // password validation
+    const passwordOnChangeHandler = (e)=>{
+        setErrorMessage("")
+           const pass = e.target.value;
+
+           if(! /[a-z]/.test(pass)){
+               setErrorMessage("Password must contain at least one lowercase letter!");
+               return;
+            }
+            if(! /[A-Z]/.test(pass)){
+                setErrorMessage("Password must contain at least one Uppercase letter!");
+                return;
+            }
+            if(! /[0-9]/.test(pass)){
+                setErrorMessage("Password must contain at least one number!");
+                return;
+            }
+            if(! /[@$!%*?&]/.test(pass)){
+                setErrorMessage("Password must contain at least one special character!");
+                return;
+            }
+            if( pass.length < 6 ){
+                setErrorMessage("Password must include at least 6 characters!");
+                return;
+            }
+        else{
+             setSuccessMessage("This password is strong!")
+        }
+    }
+
+    // Log  in with google
+    const googleSignInHandler = ()=>{
+        signInWithGoogle()
+        .then(res => {
+            navigate("/"); 
+        })
+        .catch(error => console.log(error.message))
     }
     return (
 <div className="">
@@ -31,7 +100,7 @@ const SignUp = () => {
                 <div className="p-10">
                     <img className="w-full h-full" src={signUpBanner} alt="" />
                 </div>
-            <div className="card bg-base-100 max-h-fit w-full md:max-w-full sm:max-w-sm  mx-auto shrink-0 border shadow mt-10 flex justify-center ">
+            <div className="card bg-base-200 max-h-fit w-full md:max-w-full sm:max-w-sm  mx-auto shrink-0 border shadow mt-10 flex justify-center ">
                 <div className="text-center mt-5">
                     <h3 className="font-semibold text-3xl">Create an account</h3>
                 </div>
@@ -52,6 +121,12 @@ const SignUp = () => {
                 </div>
                 <div className="form-control">
                 <label className="label">
+                    <span className="label-text">Photo</span>
+                </label>
+                <input type="text" name="photo" placeholder="Photo-URL" className="input input-bordered rounded-full" required />
+                </div>
+                <div className="form-control">
+                <label className="label">
                     <span className="label-text">Email</span>
                 </label>
                 <input type="email" name="email" placeholder="email" className="input input-bordered rounded-full" required />
@@ -61,8 +136,11 @@ const SignUp = () => {
                     <span className="label-text">Password</span>
                 </label>
                 <div className="form-control relative">
-                <input name="password" type={passVisible? "text": "password"} placeholder="password" className="input input-bordered rounded-full" required />
+                <input name="password" onChange={passwordOnChangeHandler} onClick={passwordFocusHandler} type={passVisible? "text": "password"} placeholder="password" className="input input-bordered rounded-full" required />
                 <span className="absolute right-5 top-3"><button onClick={passwordVisibilityHandler}>{passVisible? <FaEyeSlash />: <FaEye />}</button></span>
+                {errorMessage && <p className={`text-xs absolute left-4 -bottom-5 text-error`}>{errorMessage} </p> ||
+                successMessage && <p className={`text-xs absolute left-4 -bottom-5 text-success`}>{successMessage} </p>
+                }
                 </div>
                  <label className="label cursor-pointer justify-normal gap-2 mt-4">
                     <input name="terms" type="checkbox" className="checkbox rounded-full w-5 h-5" />
@@ -74,15 +152,15 @@ const SignUp = () => {
                 </div>
             </form>
             <div className="px-8">
-            <div className="divider text-sm">OR</div>
+            <div className="divider text-sm">Or Log in</div>
             <div className="flex justify-center gap-5 mb-5">
-            <button className="btn btn-sm rounded-full "><FcGoogle /></button>
+            <button onClick={googleSignInHandler} className="btn btn-sm rounded-full "><FcGoogle /></button>
             <button className="btn btn-sm rounded-full"><FaFacebook color="blue" /> </button>
             <button className="btn btn-sm rounded-full"><FaGithub /></button>
 
             </div>
             </div>
-                <p className="px-8 pb-5 text-sm">Don&apos;t have an account? <Link to="/login" className="underline text-[#0056D2]">Log in</Link></p>
+                <p className="px-8 pb-5 text-sm">Already have an account? <Link to="/login" className="underline text-[#0056D2]">Log in</Link></p>
             </div>
             </div>
         </div>

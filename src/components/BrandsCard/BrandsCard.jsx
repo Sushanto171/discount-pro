@@ -1,22 +1,12 @@
 /* eslint-disable react/prop-types */
-import { useContext } from "react";
 import { FaStar } from "react-icons/fa";
-import { useNavigate } from "react-router-dom";
-import { AuthContext } from "../../Hooks/AuthContext";
+import { Link,  } from "react-router-dom";
 
 const BrandsCard = ({brand}) => {
-    const {brand_logo, brand_name, description, rating,isSaleOn} =brand;
-    const {user} = useContext(AuthContext);
-    const navigate = useNavigate();
-    const handleViewCoupons = ()=>{
-        console.log("button clicked")
-        if(user){
-            navigate(`/brand/${brand._id}`)
-        }else{
-            navigate(`/login`)
-        }
-    }
-    return (
+    const {brand_logo, brand_name, description, rating,isSaleOn, _id} =brand;
+ 
+  
+  return (
 <div>
 <div className="sm:flex justify-between p-4 min-h-36 bg-white shadow-lg rounded-lg border gap-8
  border-gray-200 hover:shadow-2xl transition-all duration-300">
@@ -57,14 +47,15 @@ const BrandsCard = ({brand}) => {
           Sale is On!
         </p>
       )}
-      <button 
-        onClick={handleViewCoupons}
+      <Link to={`/brand/:${_id}`}>
+      <button
         className={`${isSaleOn || "btn-disabled bg-gray-400"} 
         mt-6 w-full px-4 py-2 btn-outline hover:bg-amber-400 focus:border-amber-400 rounded-none
-         text-white bg-[#0056D2]  shadow-2xl transition-all`}
+        text-white bg-[#0056D2]  shadow-2xl transition-all`}
         >
        {isSaleOn ? " View Coupons":"Not available"}
       </button>  
+          </Link>
         </div>
     </div>
 

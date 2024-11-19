@@ -4,7 +4,6 @@ import Footer from './../Footer/Footer';
 
 const MainLayout = () => {
     const data = useLoaderData();
-    // console.log(data)
     return (
         <div>
             <Navbar />

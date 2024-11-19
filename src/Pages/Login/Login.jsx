@@ -1,38 +1,60 @@
+/* eslint-disable no-unused-vars */
 import Navbar from "../../components/Navbar/Navbar";
 import logInBanner from "../../assets/Illustration.png";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaFacebook, FaGithub, } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { useState } from "react";
+import { useContext, useState } from "react";
+import { AuthContext } from "../../Hooks/AuthContext";
 
 const Login = () => {
-
+    const [errorMessage, setErrorMessage] = useState("");
     const [passVisible, setPassVisible] = useState(false);
-
+    const { signInWithGoogle, signInUser  } = useContext(AuthContext);
+    const navigate = useNavigate();
+    const location = useLocation();
     const submitFormHandler =(e)=>{
-        
         e.preventDefault();
 
         const formData = new FormData(e.target);
         const email = formData.get("email");
         const password = formData.get("password");
         const remember = formData.get("remember")
-        console.log({email, password, remember});
+ 
 
+        // reset error 
+        setErrorMessage("");
+
+        // user log in
+        signInUser(email, password)
+        .then(res => {
+            navigate(location.state?.from || "/");
+        })
+        .catch(error => setErrorMessage(error.message))
+
+        e.target.reset();
     }
 
     // forgot password
     const forgotHandler =(e)=>{
-
         e.preventDefault();
-
-        console.log('forgot btn clicked')
+        setErrorMessage("");
     }
 
     const passwordVisibilityHandler =(e)=>{
         e.preventDefault();
         setPassVisible(!passVisible);
-    }
+    };
+
+        // Log  in with google
+        const googleSignInHandler = ()=>{
+            signInWithGoogle()
+            .then(res => {
+                navigate(location.state?.from);
+        })
+            .catch(error => console.log(error.message));
+            setErrorMessage("");
+        }
     return (
         <div className="">
             <Navbar />
@@ -41,7 +63,7 @@ const Login = () => {
                 <div className="p-10">
                     <img className="w-full h-full" src={logInBanner} alt="" />
                 </div>
-            <div className="card bg-base-100 max-h-fit w-full md:max-w-sm shrink-0 border shadow mt-10 flex justify-center ">
+            <div className="card bg-base-200 max-h-fit w-full md:max-w-sm shrink-0 border shadow mt-10 flex justify-center ">
                 <div className="text-center mt-5">
                     <h3 className="font-semibold text-3xl">Welcome back!</h3>
                 </div>
@@ -59,6 +81,7 @@ const Login = () => {
                 <div className="form-control relative">
                 <input name="password" type={passVisible? "text": "password"} placeholder="password" className="input input-bordered rounded-full" required />
                 <span className="absolute right-5 top-3"><button onClick={passwordVisibilityHandler}>{passVisible? <FaEyeSlash />: <FaEye />}</button></span>
+                {errorMessage && <p className={`text-xs absolute left-4 -bottom-5 text-error`}>{errorMessage} </p>}
                 </div>
                     <div className="flex justify-between mt-4">
                 <label className="label cursor-pointer justify-normal gap-2">
@@ -77,7 +100,7 @@ const Login = () => {
             <div className="px-8">
             <div className="divider text-sm">OR</div>
             <div className="flex justify-center gap-5 mb-5">
-            <button className="btn btn-sm rounded-full "><FcGoogle /></button>
+            <button onClick={googleSignInHandler} className="btn btn-sm rounded-full "><FcGoogle /></button>
             <button className="btn btn-sm rounded-full"><FaFacebook color="blue" /> </button>
             <button className="btn btn-sm rounded-full"><FaGithub /></button>
             </div>

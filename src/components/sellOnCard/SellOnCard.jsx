@@ -2,7 +2,6 @@
 const SellOnCard = (props) => {
     const {item} = props || {};
     const {brand_logo, brand_name, category, coupons} = item;
-    console.log(item)
     return (
         <div className="card bg-blue-50 border hover:shadow-md pt-5 duration-300">
         <figure className="p-3 h-20">

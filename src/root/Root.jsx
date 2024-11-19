@@ -6,9 +6,10 @@ import Brands from "../Pages/Brands/Brands";
 import AboutDev from "../Pages/AboutDev/AboutDev";
 import Profile from './../Pages/Profile/Profile';
 import TopBrands from "../components/TopBrands/TopBrands";
-import Brand from "../Pages/Brand/Brand";
 import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
+import PrivateRoute from './../PrivateRoute/PrivateRoute';
+import Brand from './../Pages/Brand/Brand';
 
 const router = createBrowserRouter([
     {
@@ -34,7 +35,7 @@ const router = createBrowserRouter([
             },
             {
                 path: "/brand/:name",
-                element: <Brand />
+                element: <PrivateRoute ><Brand /></PrivateRoute>
             },
             {
                 path: "/about-dev",
