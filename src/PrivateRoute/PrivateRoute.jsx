@@ -11,7 +11,6 @@ const PrivateRoute = ({children}) => {
     if(user){
         return children;
     }
-console.log(children)
     return (
         <div className="w-11/12 sm:w-10/12 mx-auto">
             <Navigate state={{from: location.pathname}} to="/login"/>

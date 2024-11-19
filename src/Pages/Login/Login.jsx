@@ -1,16 +1,17 @@
 /* eslint-disable no-unused-vars */
 import Navbar from "../../components/Navbar/Navbar";
 import logInBanner from "../../assets/Illustration.png";
-import { Link, useLocation, useNavigate } from "react-router-dom";
+import { Await, Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash, FaFacebook, FaGithub, } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Hooks/AuthContext";
+import Swal from "sweetalert2";
 
 const Login = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [passVisible, setPassVisible] = useState(false);
-    const { signInWithGoogle, signInUser  } = useContext(AuthContext);
+    const { signInWithGoogle, signInUser, passwordRecovery} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const submitFormHandler =(e)=>{
@@ -29,16 +30,42 @@ const Login = () => {
         signInUser(email, password)
         .then(res => {
             navigate(location.state?.from || "/");
+            successAlert("Log in Success!");
         })
-        .catch(error => setErrorMessage(error.message))
-
-        e.target.reset();
+        .catch(error =>{
+            alertMessage(error.message, "error");
+            setErrorMessage(error.message)})
+        if(! errorMessage){
+            e.target.reset();
+        } 
     }
 
     // forgot password
-    const forgotHandler =(e)=>{
+    const forgotHandler =async (e)=>{
         e.preventDefault();
         setErrorMessage("");
+        const { value: email }  = await Swal.fire({
+            title: "Input email address",
+            input: "email",
+            inputLabel: "Your email address",
+            inputPlaceholder: "Enter your email address",
+            confirmButtonText: 'Done',
+          });
+          if(email){
+            passwordRecovery(email)
+            .then(res =>{
+                Swal.fire({
+                    title: `Thank you!`,
+                    text: ` We've received your email: ${email}. Please check your inbox for further instructions.`,
+                    confirmButtonText: 'Continue',
+                    background: "black",
+                    color: "white"
+                  })
+            })
+            .catch(error => {
+                alertMessage(error.message, "error");
+            })
+          }
     }
 
     const passwordVisibilityHandler =(e)=>{
@@ -50,11 +77,42 @@ const Login = () => {
         const googleSignInHandler = ()=>{
             signInWithGoogle()
             .then(res => {
-                navigate(location.state?.from);
+                navigate(location.state?.from || "/");
+                successAlert("Log in Success!");
         })
-            .catch(error => console.log(error.message));
+            .catch(error =>  alertMessage(error.message, "error"));
             setErrorMessage("");
-        }
+           
+        };
+
+        const alertMessage = (message, icon)=>{
+            Swal.fire({
+                title: `${message ==="Firebase: Error (auth/invalid-credential)."? "Invalid email or password": message}!`,
+                icon: icon,
+                confirmButtonText: 'Continue',
+                background: "black",
+              });
+              timeCounter();
+        };
+
+        const successAlert = (message)=>{
+            Swal.fire({
+                title: `${message}!`,
+                icon: "success",
+                confirmButtonText: 'Continue',
+                background: "black",
+                color: "white",
+                width: "auto",
+                showConfirmButton : false,
+              })
+              timeCounter();
+        };
+    
+               const timeCounter = ()=>{
+                setTimeout(()=>{
+                    Swal.close()	
+                },2000)
+            };
     return (
         <div className="">
             <Navbar />
@@ -101,8 +159,8 @@ const Login = () => {
             <div className="divider text-sm">OR</div>
             <div className="flex justify-center gap-5 mb-5">
             <button onClick={googleSignInHandler} className="btn btn-sm rounded-full "><FcGoogle /></button>
-            <button className="btn btn-sm rounded-full"><FaFacebook color="blue" /> </button>
-            <button className="btn btn-sm rounded-full"><FaGithub /></button>
+            {/* <button className="btn btn-sm rounded-full"><FaFacebook color="blue" /> </button>
+            <button className="btn btn-sm rounded-full"><FaGithub /></button> */}
             </div>
             </div>
                 <p className="px-8 pb-5 text-sm">Don&apos;t have an account? <Link to="/signup" className="underline text-[#0056D2]">Sign up</Link></p>

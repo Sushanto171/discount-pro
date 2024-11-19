@@ -6,6 +6,8 @@ import Navbar from "../../components/Navbar/Navbar";
 import signUpBanner from "../../assets/Illustration (1).png"
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Hooks/AuthContext";
+import Swal from 'sweetalert2';
+
 
 const SignUp = () => {
     const [passVisible, setPassVisible] = useState(false);
@@ -25,11 +27,12 @@ const SignUp = () => {
         const terms = e.target.terms.checked;
 
         if(errorMessage){
-            alert("follow Requirement")
+            alertMessage("Follow all requirements!", "warning");
+      
             return
         }
         if(! terms){
-            alert("Please Accept our terms & conditions");
+            alertMessage("Please Accept our terms & conditions", "warning")
             return
         }
         
@@ -37,8 +40,11 @@ const SignUp = () => {
         createUser(email, password)
         .then(res => {
             navigate("/"); 
+            successAlert("Sign up Success!");
         })
-        .catch(error => console.log(error.message))
+        .catch(error =>{
+            alertMessage(error.message === "Firebase: Error (auth/email-already-in-use)."? "This email already exist": errorMessage, "error" );
+        })
 
         e.target.reset();
         setSuccessMessage('');
@@ -88,10 +94,43 @@ const SignUp = () => {
     const googleSignInHandler = ()=>{
         signInWithGoogle()
         .then(res => {
+            successAlert("Log in Success!");
             navigate("/"); 
         })
-        .catch(error => console.log(error.message))
+        .catch(error => {
+            alertMessage(error.message, "error")
+        })
     }
+
+    const alertMessage = (message, icon)=>{
+        Swal.fire({
+            title: `${message}!`,
+            icon: icon,
+            confirmButtonText: 'Continue',
+            background: "black",
+            color: "white"
+          })
+          timeCounter();
+    };
+    const successAlert = (message)=>{
+        Swal.fire({
+            title: `${message}!`,
+            icon: "success",
+            confirmButtonText: 'Continue',
+            background: "black",
+            color: "white",
+            width: "auto",
+            showConfirmButton : false,
+          })
+          timeCounter();
+    };
+
+           const timeCounter = ()=>{
+            setTimeout(()=>{
+                Swal.close()	
+            },2000)
+        };
+     
     return (
 <div className="">
             <Navbar />
@@ -155,12 +194,12 @@ const SignUp = () => {
             <div className="divider text-sm">Or Log in</div>
             <div className="flex justify-center gap-5 mb-5">
             <button onClick={googleSignInHandler} className="btn btn-sm rounded-full "><FcGoogle /></button>
-            <button className="btn btn-sm rounded-full"><FaFacebook color="blue" /> </button>
-            <button className="btn btn-sm rounded-full"><FaGithub /></button>
+            {/* <button className="btn btn-sm rounded-full"><FaFacebook color="blue" /> </button>
+            <button className="btn btn-sm rounded-full"><FaGithub /></button> */}
 
             </div>
             </div>
-                <p className="px-8 pb-5 text-sm">Already have an account? <Link to="/login" className="underline text-[#0056D2]">Log in</Link></p>
+                <p className="px-8 pb-5 text-sm">Already have an account? <Link to="/login" className="underline text-[#181819]">Log in</Link></p>
             </div>
             </div>
         </div>

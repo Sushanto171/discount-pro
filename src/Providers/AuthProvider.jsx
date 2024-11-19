@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AuthContext } from "../Hooks/AuthContext";
 import auth from './../firebase.init/firebase';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
 
 
 const AuthProvider = ({children }) => {
@@ -25,10 +25,7 @@ const AuthProvider = ({children }) => {
             }
         }
     ) ;
-
-    
     return ()=> unSubscribe();
-
     },[])
 
     // create user 
@@ -50,6 +47,10 @@ const userSignOut = ()=>{
     return signOut(auth)
 }
 
+// forgot password 
+const passwordRecovery= (email)=>{
+    return sendPasswordResetEmail(auth, email)
+}
 
     const contextInfo = {
         user,
@@ -64,6 +65,7 @@ const userSignOut = ()=>{
         signInUser,
         userSignOut,
         photo,
+        passwordRecovery,
     }
     return (
        <AuthContext.Provider value={contextInfo}>

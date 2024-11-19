@@ -7,11 +7,12 @@ import logo from "../../assets/logo.png"
 import { useContext } from "react";
 import { AuthContext } from "../../Hooks/AuthContext";
 import {  RiBarChartHorizontalLine } from "react-icons/ri";
+import Swal from "sweetalert2";
 
 const Navbar = () => {
     const {user, firstName, userSignOut, photo} = useContext(AuthContext);
     const navigate = useNavigate();
-    console.log(user)
+
 
     const links =(
         <>
@@ -25,8 +26,29 @@ const Navbar = () => {
     
     const signOutHandler = ()=>{
         userSignOut()
-        .then(()=> navigate("/login"))
-    }
+        .then(()=> {navigate("/login")
+            successAlert("Sign out success!")
+        });
+    };
+
+    const successAlert = (message)=>{
+        Swal.fire({
+            title: `${message}!`,
+            icon: "success",
+            confirmButtonText: 'Continue',
+            background: "black",
+            color: "white",
+            width: "auto",
+            showConfirmButton : false,
+          })
+          timeCounter();
+    };
+
+           const timeCounter = ()=>{
+            setTimeout(()=>{
+                Swal.close()	
+            },2000)
+        };
     return (
         <nav className=""> 
                 <div className="navbar bg-base-100 md:w-10/12 mx-auto">
