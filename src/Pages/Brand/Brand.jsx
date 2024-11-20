@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { FaStar } from "react-icons/fa6";
 import CouponCard from './../../components/CouponCard/CouponCard';
+import { AuthContext } from "../../Hooks/AuthContext";
 
 const Brand = () => {
+  const {setTitle} = useContext(AuthContext);
     const {id} = useParams();
     const [brand, setBrand] = useState({});
     const [errorMessage, setErrorMessage] = useState('');
@@ -19,8 +21,11 @@ const Brand = () => {
         }
     },[id]);
     
-const {brand_name, rating, description, brand_logo, coupons, shop_Link, isSaleOn} = brand;
-console.log({brand_name, rating, description, brand_logo, coupons, shop_Link, isSaleOn})
+const {brand_name, rating,  brand_logo, coupons, shop_Link, isSaleOn} = brand;
+// console.log({brand_name, rating, description, brand_logo, coupons, shop_Link, isSaleOn})
+useEffect(() => {
+  setTitle(brand_name);
+}, [setTitle, brand_name]);
 
     if(errorMessage){
         return <h1 className="font-semibold text-red-700">{errorMessage}</h1>

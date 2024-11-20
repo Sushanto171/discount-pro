@@ -29,10 +29,10 @@ useEffect(()=>{
     return (
         <div ref={branOnSellRef}>
             <h3 ref={textRef} className={`font-bold text-xl md:text-2xl text-center uppercase
-                 ${isVisible ? "animate__animated animate__fadeInDown animate__delay-1s": ""} `}>Brands On Sell</h3>
-                 <hr ref={textRef} className={`border-black w-1/2 md:w-3/12 mt-2 mx-auto ${isVisible ? "animate__animated animate__fadeInTopLeft animate__delay-1s": ""}`}></hr>
+                 ${isVisible ? "animate__animated animate__backInLeft animate__delay-1s": ""} `}>Brands On Sell</h3>
+                 <hr ref={textRef} className={`border-black w-1/2 md:w-4/12 mt-2 mx-auto ${isVisible ? "animate__animated animate__fadeInTopLeft animate__delay-1s": ""}`}></hr>
   
-            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-5 my-8">
+            <div className="grid grid-cols-2 sm:grid-cols-2 md:grid-cols-3  gap-2 md:gap-5  my-8">
             {
                 brands.map(item => <SellOnCard item={item} key={item._id} />)
             }

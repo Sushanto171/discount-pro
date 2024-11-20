@@ -3,8 +3,8 @@ import { FaStar } from "react-icons/fa";
 import { Link,  } from "react-router-dom";
 
 const BrandsCard = ({brand}) => {
-    const {brand_logo, brand_name, description, rating,isSaleOn, _id} =brand;
- 
+
+    const {brand_logo, brand_name, description, rating,isSaleOn, _id,} =brand;
   
   return (
 <div>

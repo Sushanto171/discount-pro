@@ -93,9 +93,19 @@ const Navbar = () => {
             </div>
             <div className="navbar-end flex justify-between items-center w-full lg:max-w-72 ">
             <div className="ml-3 flex items-center">
-            {user && user?.photoURL && <Link to="/profile" className="mr-2 shadow rounded-full"><img className="w-10 rounded-full block ring " src={user?.photoURL}/></Link>}
-            {! user?.photoURL && user && <Link to="/profile" className="mr-2 shadow rounded-full"><img className="w-10 rounded-full block ring " src={ photo ||  avatar}/></Link>}
-            {user && <h4 className="font-semibold ">Hi, {user?.displayName?.slice(0,8)}{user?.displayName?.length > 8 && "..." || firstName }</h4>}
+            {user && user?.photoURL && <Link to="/profile" className="mr-2 shadow rounded-full">
+            <div className="relative flex items-center justify-center">
+            <span className="animate-ping absolute inline-flex h-8 w-8 rounded-full bg-sky-400 opacity-75 z-0"></span>
+            <img className="w-10 rounded-full block ring z-10" src={user?.photoURL}/>
+             </div>
+            </Link>}
+            {! user?.photoURL && user && <Link to="/profile" className="mr-2 shadow rounded-full">
+            <div className="relative flex items-center justify-center">
+            <span className="animate-ping absolute inline-flex h-8 w-8 rounded-full bg-sky-400 opacity-75 z-0"></span>
+            <img className="w-10 h-10 rounded-full block ring z-10 " src={ photo ||  avatar}/>
+             </div>
+            </Link>}
+            {user && <h4 className="font-semibold ">Hi,{user?.displayName?.slice(0,7)}{user?.displayName?.length > 7 && ".." || firstName }</h4>}
             {/* {user && user?.email && <span className="text-xs block">{user?.email}</span>} */}
             </div>
             <div className="flex items-center justify-end">

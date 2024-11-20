@@ -4,7 +4,7 @@ import logInBanner from "../../assets/Illustration.png";
 import {  Link, useLocation, useNavigate } from "react-router-dom";
 import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { useContext, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../Hooks/AuthContext";
 import Swal from "sweetalert2";
 import { successAlert } from "../../components/SuccessAlert/SuccessAlert";
@@ -12,10 +12,14 @@ import { successAlert } from "../../components/SuccessAlert/SuccessAlert";
 const Login = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [passVisible, setPassVisible] = useState(false);
-    const { signInWithGoogle, signInUser, passwordRecovery} = useContext(AuthContext);
+    const { signInWithGoogle, signInUser, passwordRecovery, setTitle} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
     const emailRef = useRef();
+    useEffect(() => {
+        setTitle("Log in");
+    }, [setTitle]);
+    
     const submitFormHandler =(e)=>{
         e.preventDefault();
         

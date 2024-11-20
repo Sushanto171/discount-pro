@@ -3,6 +3,7 @@ import ComCarousel from "../carousel/Carousel";
 import "./hero.css"
 import { useContext } from "react";
 import { AuthContext } from "../../Hooks/AuthContext";
+import { TypeAnimation } from "react-type-animation";
 
 
 const Hero = () => {    
@@ -14,7 +15,7 @@ const Hero = () => {
         }
     }
     return (
-        <div className='bg-hero lg:bg-no-repeat '>
+        <div className='bg-hero lg:bg-no-repeat overflow-hidden '>
     <section className="w-10/12 mx-auto relative pt-10 pb-16">
         <div className="absolute inset-x-0 bottom-0 z-10 hidden lg:flex">
             <img className="hidden lg:block max-w-[600px]" src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/5/credit-cards.png" alt="" />
@@ -23,14 +24,22 @@ const Hero = () => {
 
         <div className=" relative z-20">
         <div className="hero hero-content justify-between gap-12 md:gap-16 flex-col-reverse lg:flex-row-reverse">
-            <div className="w-full lg:w-[40%] bg-black/30 p-2 rounded-xl py-10">
+            <div className="w-full lg:w-[40%] bg-black/30 p-2 rounded-xl py-10 animate__slow animate__animated animate__fadeInBottomRight">
                 <ComCarousel />
             </div>
             <div>
-            <div className="max-w-xl mx-auto text-center">
-                <h1 className="text-3xl font-bold md:text-5xl">
-                    <span className="text-transparent bg-clip-text bg-gradient-to-r from-blue-600 to-amber-100">Save More, Spend Less!</span>
-                </h1>
+            <div className="max-w-xl mx-auto text-center animate__slow animate__animated animate__fadeInBottomLeft">
+                <div className="text-3xl font-bold text-center md:text-5xl text-transparent bg-clip-text bg-gradient-to-r md:text-left from-blue-600 to-amber-100">
+            <TypeAnimation 
+            sequence={[
+                'Save More, Spend Less!',
+                1,
+                ]}
+                speed={1}
+                style={{ fontSize: '' ,}}
+                repeat={Infinity}
+                />
+                </div>
                 <p className="mt-5 text-white opacity-80">Discover the best deals, discounts, and coupons to make your shopping smarter and more affordable. Start saving today!</p>
 
                 <button onClick={seeMoreHandler} to="/" className="w-44  items-center px-6 py-4 mt-8 font-bold text-black transition-all duration-200

@@ -2,7 +2,7 @@
 import { useEffect, useRef, useState } from "react";
 import { AuthContext } from "../Hooks/AuthContext";
 import auth from './../firebase.init/firebase';
-import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut } from "firebase/auth";
+import { createUserWithEmailAndPassword, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 
 
 const AuthProvider = ({children }) => {
@@ -12,9 +12,17 @@ const AuthProvider = ({children }) => {
     const [lastName, setLastName] = useState("");
     const [photo, setPhoto] = useState("");
     const [loader, setLoader] = useState(true);
+    const [title, setTitle] = useState("Home")
 
     // providers
     const googleProvider = new GoogleAuthProvider();
+
+
+    // 
+    useEffect(()=>{
+        document.title = title + " | Coupon Oasis";
+    } ,[title]);
+
 
     // observe user
     useEffect(()=>{
@@ -55,6 +63,12 @@ const passwordRecovery= (email)=>{
     return sendPasswordResetEmail(auth, email)
 }
 
+
+// update profile
+const updateUserProfile =(name, photo)=>{
+    return updateProfile(auth.currentUser, {displayName: name, photoURL: photo})
+}
+
     const contextInfo = {
         user,
         branOnSellRef,
@@ -70,6 +84,8 @@ const passwordRecovery= (email)=>{
         photo,
         passwordRecovery,
         loader,
+        setTitle,
+        updateUserProfile,
     }
     return (
        <AuthContext.Provider value={contextInfo}>

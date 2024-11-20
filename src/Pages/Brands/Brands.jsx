@@ -1,9 +1,15 @@
 import { FaSearch } from "react-icons/fa";
 import { useLoaderData } from "react-router-dom";
 import BrandsCard from "../../components/BrandsCard/BrandsCard";
+import { useContext, useEffect } from "react";
+import { AuthContext } from "../../Hooks/AuthContext";
 
 const Brands = () => {
     const data = useLoaderData();
+    const {setTitle} = useContext(AuthContext);
+    useEffect(() => {
+        setTitle("Brands");
+    }, [setTitle]);
 
     return (
         <div className="w-11/12 sm:w-10/12 mx-auto">

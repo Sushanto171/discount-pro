@@ -4,7 +4,7 @@ import { FcGoogle } from "react-icons/fc";
 import { Link, useNavigate } from "react-router-dom";
 import Navbar from "../../components/Navbar/Navbar";
 import signUpBanner from "../../assets/Illustration (1).png"
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Hooks/AuthContext";
 import Swal from 'sweetalert2';
 
@@ -13,9 +13,12 @@ const SignUp = () => {
     const [passVisible, setPassVisible] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
-    const {createUser, signInWithGoogle, setFirstName, setLastName , setPhoto} = useContext(AuthContext);
+    const {createUser, signInWithGoogle, setFirstName, setLastName , setPhoto, setTitle} = useContext(AuthContext);
     const navigate = useNavigate();
 
+    useEffect(() => {
+        setTitle("Sign Up");
+    }, [setTitle]);
         const submitFormHandler = (e)=>{
         e.preventDefault();
 

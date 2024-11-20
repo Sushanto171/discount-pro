@@ -1,3 +1,4 @@
+
 import Hero from "../Hero/Hero";
 
 const Banner = () => {
