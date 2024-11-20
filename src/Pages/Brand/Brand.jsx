@@ -50,7 +50,7 @@ console.log({brand_name, rating, description, brand_logo, coupons, shop_Link, is
 
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 mt-20">
                 {
-                   coupons && coupons.map(coupon =><CouponCard key={coupon.coupon_code}  coupon={coupon} />)
+                   coupons && coupons.map(coupon =><CouponCard key={coupon.coupon_code} isSaleOn={isSaleOn}  coupon={coupon} shop_Link={shop_Link}/>)
                 }
             </div>
         </div>

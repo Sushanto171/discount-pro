@@ -1,7 +1,35 @@
+/* eslint-disable no-unused-vars */
+import { useState } from "react";
+import { redirectAlert, successAlert } from "../SuccessAlert/SuccessAlert";
+import { useNavigate } from "react-router-dom";
+
+
 /* eslint-disable react/prop-types */
-const CouponCard = ({coupon}) => {
-    const {condition, coupon_code, coupon_type, description, expiry_date} = coupon;
-    
+const CouponCard = ({coupon, isSaleOn, shop_Link}) => {
+    const {condition, coupon_code, coupon_type, description, expiry_date,} = coupon;
+    const [copied, setCopied] = useState("Copy Code");
+    const [btnAnimate, setBtnAnimate] = useState(false);
+    const copyBtnHandler = (shop_Link)=>{
+        setBtnAnimate(true);
+        addToTextClipboard();
+    }    
+
+    const addToTextClipboard = ()=>{
+     navigator.clipboard.writeText(coupon_code)
+     .then(() =>{
+        setCopied("copied");
+        successAlert("Copied success!");
+        setTimeout(()=>{
+            redirectAlert("go to store")
+            .then(res => {
+                if(res){ 
+                    console.log(shop_Link)
+                    window.open(shop_Link, "_blank")}; 
+            })
+            },2000)
+     })
+     .catch(() => setCopied(false))
+    }
     return (
         <div className="grid grid-cols-3 min-h-36 text-gray-400 ">
             <div className="col-span-2  rounded-r-2xl rounded-md bg-yellow-50 shadow-lg relative  border border-r-0 border-amber-200 overflow-hidden">
@@ -12,12 +40,19 @@ const CouponCard = ({coupon}) => {
             <p className="ml-5 mb-5">{description}</p>
             </div>
             </div>
-            <div className=" rounded-l-2xl rounded-md bg-yellow-50 shadow-lg border border-l-0 border-amber-200 flex flex-col justify-center items-center gap-10">
+            <div className=" rounded-l-2xl rounded-md bg-yellow-50 shadow-lg border border-l-0 border-amber-200 flex flex-col justify-center items-center ">
             <p className="font-bold text-lg">{coupon_type}</p>
-                <button className="btn btn-sm btn-outline bg-amber-200 hover:bg-amber-300 hover:text-gray-600 focus:-rotate-[20deg] border-amber-300 hover:border-amber-400">Copy Code</button>
+            <div className="my-4">
+            <input type="text" className="border w-20 text-center rounded" value={coupon_code}/>
+            </div>
+               {
+               ! isSaleOn ?
+                 <button  className={`btn btn-disabled btn-sm btn-outline bg-amber-200 hover:bg-amber-300 hover:text-gray-600 ${btnAnimate && "-rotate-[20deg]"} border-amber-300 hover:border-amber-400`}>Run Out</button> :
+                <button onClick={()=>copyBtnHandler(shop_Link)}className={`btn btn-sm btn-outline bg-amber-200 hover:bg-amber-300 hover:text-gray-600 ${btnAnimate && "-rotate-[20deg]"} border-amber-300 hover:border-amber-400`}>{copied}</button>
+               }
             </div>
         </div>
     );
 };
 
-export default CouponCard;
+export default CouponCard;;
