@@ -8,6 +8,7 @@ import { useContext } from "react";
 import { AuthContext } from "../../Hooks/AuthContext";
 import {  RiBarChartHorizontalLine } from "react-icons/ri";
 import Swal from "sweetalert2";
+import avatar from "../../assets/download.png"
 
 const Navbar = () => {
     const {user, firstName, userSignOut, photo, setPhoto, setFirstName} = useContext(AuthContext);
@@ -93,7 +94,7 @@ const Navbar = () => {
             <div className="navbar-end flex justify-between items-center w-full lg:max-w-72 ">
             <div className="ml-3 flex items-center">
             {user && user?.photoURL && <Link to="/profile" className="mr-2 shadow rounded-full"><img className="w-10 rounded-full block ring " src={user?.photoURL}/></Link>}
-            {photo && <Link to="/profile" className="mr-2 shadow rounded-full"><img className="w-10 rounded-full block ring " src={photo}/></Link>}
+            {! user?.photoURL && user && <Link to="/profile" className="mr-2 shadow rounded-full"><img className="w-10 rounded-full block ring " src={ photo ||  avatar}/></Link>}
             {user && <h4 className="font-semibold ">Hi, {user?.displayName?.slice(0,8)}{user?.displayName?.length > 8 && "..." || firstName }</h4>}
             {/* {user && user?.email && <span className="text-xs block">{user?.email}</span>} */}
             </div>

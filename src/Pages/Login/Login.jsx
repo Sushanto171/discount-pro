@@ -1,12 +1,13 @@
 /* eslint-disable no-unused-vars */
 import Navbar from "../../components/Navbar/Navbar";
 import logInBanner from "../../assets/Illustration.png";
-import { Await, Link, useLocation, useNavigate } from "react-router-dom";
-import { FaEye, FaEyeSlash, FaFacebook, FaGithub, } from "react-icons/fa";
+import {  Link, useLocation, useNavigate } from "react-router-dom";
+import { FaEye, FaEyeSlash } from "react-icons/fa";
 import { FcGoogle } from "react-icons/fc";
-import { useContext, useState } from "react";
+import { useContext, useRef, useState } from "react";
 import { AuthContext } from "../../Hooks/AuthContext";
 import Swal from "sweetalert2";
+import { successAlert } from "../../components/SuccessAlert/SuccessAlert";
 
 const Login = () => {
     const [errorMessage, setErrorMessage] = useState("");
@@ -14,48 +15,54 @@ const Login = () => {
     const { signInWithGoogle, signInUser, passwordRecovery} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
+    const emailRef = useRef();
     const submitFormHandler =(e)=>{
         e.preventDefault();
-
+        
         const formData = new FormData(e.target);
         const email = formData.get("email");
         const password = formData.get("password");
         const remember = formData.get("remember")
- 
-
+        
+        
         // reset error 
         setErrorMessage("");
 
         // user log in
         signInUser(email, password)
-        .then(res => {
+        .then(() => {
             navigate(location.state?.from || "/");
             successAlert("Log in Success!");
         })
         .catch(error =>{
-            alertMessage(error.message, "error");
-            setErrorMessage(error.message)})
-        if(! errorMessage){
-            e.target.reset();
-        } 
+            alertMessage(error.message === "firebase: Error (auth/network-request-failed)."? 
+                "Connected failed. Check your mobile data or wifi connection.": error.message, "error");
+            // setErrorMessage(error.message)
+        })
+        
+    e.target.password.value = "";
+       
     }
 
     // forgot password
     const forgotHandler =async (e)=>{
         e.preventDefault();
+       const emailValue= emailRef.current.value
+       console.log( typeof emailValue)
         setErrorMessage("");
         const { value: email }  = await Swal.fire({
             title: "Input email address",
             input: "email",
             inputLabel: "Your email address",
             inputPlaceholder: "Enter your email address",
-            confirmButtonText: 'Done',
+            confirmButtonText: 'Reset password',
             background: "black",
             color: "white",
+            inputValue: emailValue,
           });
           if(email){
             passwordRecovery(email)
-            .then(res =>{
+            .then(() =>{
                 Swal.fire({
                     title: `Thank you!`,
                     text: ` We've received your email: ${email}. Please check your inbox for further instructions.`,
@@ -78,38 +85,28 @@ const Login = () => {
         // Log  in with google
         const googleSignInHandler = ()=>{
             signInWithGoogle()
-            .then(res => {
+            .then(() => {
                 navigate(location.state?.from || "/");
                 successAlert("Log in Success!");
         })
-            .catch(error =>  alertMessage(error.message, "error"));
+            .catch(error =>  {
+                alertMessage(error.message, "error");
+            });
             setErrorMessage("");
            
         };
 
         const alertMessage = (message, icon)=>{
             Swal.fire({
-                title: `${message ==="Firebase: Error (auth/invalid-credential)."? "Invalid email or password": message}!`,
+                title: `${message ==="Firebase: Error (auth/invalid-credential)." && "Invalid email or password" 
+                    || message === "Firebase: Error (auth/internal-error)." && "Connected failed. Check your mobile data or wifi connection."
+                    || message === "Firebase: Error (auth/network-request-failed)." && "Connected failed. Check your mobile data or wifi connection." || message} !`,
                 icon: icon,
                 confirmButtonText: 'Continue',
                 background: "black",
               });
-              timeCounter();
-        };
-
-        const successAlert = (message)=>{
-            Swal.fire({
-                title: `${message}!`,
-                icon: "success",
-                confirmButtonText: 'Continue',
-                background: "black",
-                color: "white",
-                width: "auto",
-                showConfirmButton : false,
-              })
-              timeCounter();
-        };
-    
+            //   timeCounter();
+        };    
                const timeCounter = ()=>{
                 setTimeout(()=>{
                     Swal.close()	
@@ -132,7 +129,7 @@ const Login = () => {
                 <label className="label">
                     <span className="label-text">Email</span>
                 </label>
-                <input name="email" type="email" placeholder="email" className="input input-bordered rounded-full" required />
+                <input  ref={emailRef}  name="email" type="email" placeholder="email" className="input input-bordered rounded-full" required />
                 </div>
                 <div className="form-control">
                 <label className="label">
