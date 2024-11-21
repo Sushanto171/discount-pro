@@ -6,6 +6,7 @@
 
 ---
 
+### Site Link:
 
 - [@Live URL](https://coupon-collection-auth.web.app/) 
 - [@Github Repo.](https://github.com/programming-hero-web-course1/b10-a9-authentication-Sushanto171) 
@@ -17,31 +18,31 @@
 
 ---
 
-### Key Features 
+## Key Features 
 
-## 1. User Authentication
+### 1. User Authentication
 - Email and Google Login: Users can sign up or log in securely using their email address or Google account through Firebase Authentication.
 
-## 2. Browse Coupons by Brand
+### 2. Browse Coupons by Brand
 - Comprehensive Brand List: Users can view a curated list of e-commerce stores offering coupons.
 - Brand-Specific Coupons: Coupons are categorized by brands, making it easy for users to locate deals for their preferred stores.
 
-## 3. Responsive and Intuitive Interface
+### 3. Responsive and Intuitive Interface
 - Mobile-Friendly Design: The application is fully responsive, providing a seamless experience on both desktop and mobile devices.
 
-## 4. Profile Panel
+### 4. Profile Panel
 - Profile Management: User can update profile information.
 
 ---
 
-### Uses Technologies
+## Uses Technologies
 
-## 1. Frontend Technologies
+### 1. Frontend Technologies
 - React.js
 - TailwindCSS
 - DaisyUI
 
-## 2. Backend Technologies
+### 2. Backend Technologies
 - Firebase : Key features used
         - Secures user sign-up and login with email and Google.
         - Update a user's profile information.
@@ -49,7 +50,7 @@
 
 ---
 
-### npm packages uses
+## NPM packages uses
 - react
 - react router dom
 - react icons
