@@ -7,13 +7,14 @@ import signUpBanner from "../../assets/Illustration (1).png"
 import { useContext, useEffect, useState } from "react";
 import { AuthContext } from "../../Hooks/AuthContext";
 import Swal from 'sweetalert2';
+import { alertMessage, successAlert } from "../../components/SuccessAlert/SuccessAlert";
 
 
 const SignUp = () => {
     const [passVisible, setPassVisible] = useState(false);
     const [errorMessage, setErrorMessage] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
-    const {createUser, signInWithGoogle, setFirstName, setLastName , setPhoto, setTitle} = useContext(AuthContext);
+    const {createUser, signInWithGoogle, setFirstName, setLastName , setPhoto, setTitle, loading} = useContext(AuthContext);
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -41,7 +42,7 @@ const SignUp = () => {
         
         // user create
         createUser(email, password)
-        .then(res => {
+        .then(() => {
             navigate("/"); 
             successAlert("Sign up Success!");
         })
@@ -76,14 +77,14 @@ const SignUp = () => {
                 setErrorMessage("Password must contain at least one Uppercase letter!");
                 return;
             }
-            if(! /[0-9]/.test(pass)){
-                setErrorMessage("Password must contain at least one number!");
-                return;
-            }
-            if(! /[@$!%*?&]/.test(pass)){
-                setErrorMessage("Password must contain at least one special character!");
-                return;
-            }
+            // if(! /[0-9]/.test(pass)){
+            //     setErrorMessage("Password must contain at least one number!");
+            //     return;
+            // }
+            // if(! /[@$!%*?&]/.test(pass)){
+                // setErrorMessage("Password must contain at least one special character!");
+                // return;
+            // }
             if( pass.length < 6 ){
                 setErrorMessage("Password must include at least 6 characters!");
                 return;
@@ -96,7 +97,7 @@ const SignUp = () => {
     // Log  in with google
     const googleSignInHandler = ()=>{
         signInWithGoogle()
-        .then(res => {
+        .then(() => {
             successAlert("Log in Success!");
             navigate("/"); 
         })
@@ -104,36 +105,6 @@ const SignUp = () => {
             alertMessage(error.message, "error")
         })
     }
-
-    const alertMessage = (message, icon)=>{
-        Swal.fire({
-            title: `${message}!`,
-            icon: icon,
-            confirmButtonText: 'Continue',
-            background: "black",
-            color: "white"
-          })
-          timeCounter();
-    };
-    const successAlert = (message)=>{
-        Swal.fire({
-            title: `${message}!`,
-            icon: "success",
-            confirmButtonText: 'Continue',
-            background: "black",
-            color: "white",
-            width: "auto",
-            showConfirmButton : false,
-          })
-          timeCounter();
-    };
-
-           const timeCounter = ()=>{
-            setTimeout(()=>{
-                Swal.close()	
-            },2000)
-        };
-     
     return (
 <div className="">
             <Navbar />
@@ -180,7 +151,7 @@ const SignUp = () => {
                 <div className="form-control relative">
                 <input name="password" onChange={passwordOnChangeHandler} onClick={passwordFocusHandler} type={passVisible? "text": "password"} placeholder="password" className="input input-bordered rounded-full" required />
                 <span className="absolute right-5 top-3"><button onClick={passwordVisibilityHandler}>{passVisible? <FaEyeSlash />: <FaEye />}</button></span>
-                {errorMessage && <p className={`text-xs absolute left-4 -bottom-7 sm:-bottom-5 text-error`}>{errorMessage} </p> ||
+                {errorMessage && <p className={`text-xs absolute left-4 -bottom-9 sm:-bottom-5 text-error`}>{errorMessage} </p> ||
                 successMessage && <p className={`text-xs absolute left-4 -bottom-5 text-success`}>{successMessage} </p>
                 }
                 </div>

@@ -9,7 +9,7 @@ const MainLayout = () => {
     const {loader} = useContext(AuthContext);
 
     if(loader){
-        return <p className="min-h-screen w-full flex justify-center items-center"><PulseLoader color="#dae21e" /></p>
+        return <p className="min-h-screen w-full flex justify-center items-center"><PulseLoader color="#0056D2" /></p>
     }
 
     return (

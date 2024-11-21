@@ -1,0 +1,21 @@
+[
+    {
+      "id": 1,
+      "name": "Brand A",
+      "logo": "/images/brand-a-logo.png",
+      "deals": "25% off on all products"
+    },
+    {
+      "id": 2,
+      "name": "Brand B",
+      "logo": "/images/brand-b-logo.png",
+      "deals": "Buy 1 Get 1 Free"
+    },
+    {
+      "id": 3,
+      "name": "Brand C",
+      "logo": "/images/brand-c-logo.png",
+      "deals": "15% cashback on purchases"
+    }
+  ]
+  

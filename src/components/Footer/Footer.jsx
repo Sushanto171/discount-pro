@@ -1,4 +1,4 @@
-import { FaFacebook, FaGooglePlusG, FaLinkedin, FaTwitter, FaYoutube } from "react-icons/fa";
+import { FaFacebook,  FaLinkedin, FaTwitter,  } from "react-icons/fa";
 
 const Footer = () => {
     return (
@@ -12,13 +12,13 @@ const Footer = () => {
             </div>
             <div className="sm:flex items-center flex-row-reverse justify-around w-full mt-10 ">
             <div className="flex gap-4 text-gray-400 justify-center items-center">
-                <button><FaFacebook size={25} /></button>
-                <button><FaTwitter size={25} /></button>
-                <button><FaYoutube size={25}  /></button>
-                <button><FaGooglePlusG size={25}  /></button>
-                <button><FaLinkedin size={25}  /></button>
+              <a href="https://www.facebook.com/Sushantochandrasharkar.me/" rel="noopener noreferrer" target="_blank"> <button><FaFacebook size={25} /></button></a>
+              {/* <a href="#" rel="noopener noreferrer" target="_blank"> <button><FaYoutube size={25} /></button></a> */}
+              {/* <a href="https://www.google.com" rel="noopener noreferrer" target="_blank"> <button><FaGooglePlusG size={25}  /></button></a> */}
+              <a href="https://www.linkedin.com/in/sushanto-chandra-sharkar-144b95339/" rel="noopener noreferrer" target="_blank"> <button><FaLinkedin size={25} /></button></a>
+              <a href="https://x.com/sushanto171/" rel="noopener noreferrer" target="_blank"> <button><FaTwitter size={25} /></button></a>
             </div>
-            <p className="text-gray-400 text-xs sm:text-base my-3">Coupon oasis 2024 &copy; All Right reserved</p>
+            <p className="text-gray-400 text-xs sm:text-base my-3">Discount pro 2024 &copy; All Right reserved</p>
             </div>
             </div>
         </div>

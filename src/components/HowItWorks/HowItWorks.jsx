@@ -58,14 +58,14 @@ const HowItWorks = () => {
         <hr ref={textRef} className={`border-black w-1/2 md:w-6/12 mt-2 mx-auto ${isVisible ? "animate__animated animate__fadeInTopRight animate__delay-1s": ""}`}></hr>
 
       </div>
-      <div className=" w-full px-2 space-y-2 mt-8">
+      <div className=" w-full px-2 space-y-3 mt-8">
         {steps.map((step) => (
-          <div
+          <div 
             key={step.id}
-            className="flex bg-white shadow p-6 rounded-lg text-center hover:shadow-lg"
+            className="flex bg-blue-50 shadow p-6 rounded-lg text-center hover:shadow-lg"
           >
             <div className="">{step.icon}</div>
-            <div>
+            <div className="pl-3  text-left">
             <h3 className="text-lg lg:text-xl font-semibold mb-2">{step.title}</h3>
             <p className="text-gray-600 text-sm">{step.description}</p>
           </div>

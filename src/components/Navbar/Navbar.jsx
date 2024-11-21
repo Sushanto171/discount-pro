@@ -9,19 +9,18 @@ import { AuthContext } from "../../Hooks/AuthContext";
 import {  RiBarChartHorizontalLine } from "react-icons/ri";
 import Swal from "sweetalert2";
 import avatar from "../../assets/download.png"
+import { IoLogOutSharp } from "react-icons/io5";
 
 const Navbar = () => {
     const {user, firstName, userSignOut, photo, setPhoto, setFirstName} = useContext(AuthContext);
     const navigate = useNavigate();
     const {pathname} = useLocation();
-
-
     const links =(
         <>
-        <li><NavLink className={({isActive})=> isActive? "border border-black rounded-none": "border border-transparent"} to="/"><IoIosHome /> Home</NavLink></li>
-        <li><NavLink className={({isActive})=> isActive? "border border-black rounded-none": "border border-transparent"} to= "/brands" ><MdProductionQuantityLimits /> Brands</NavLink></li>
-        <li><NavLink className={({isActive})=> isActive? "border border-black rounded-none": "border border-transparent"} to="/about-dev"><FcAbout /> About Dev</NavLink></li>
-        {user && <li><NavLink className={({isActive})=> isActive? "border border-black rounded-none": "border border-transparent"} to="/profile"><RxAvatar /> My Profile</NavLink></li>
+        <li><NavLink className={({isActive})=> isActive? "border border-[#0056D2] !text-[#0056D2] rounded-none": "border border-transparent " } to="/"><IoIosHome /> Home</NavLink></li>
+        <li><NavLink className={({isActive})=> isActive? "border border-[#0056D2] !text-[#0056D2] rounded-none": "border border-transparent"} to= "/brands" ><MdProductionQuantityLimits /> Brands</NavLink></li>
+        <li><NavLink className={({isActive})=> isActive? "border border-[#0056D2] !text-[#0056D2] rounded-none": "border border-transparent"} to="/about-dev"><FcAbout /> About Dev</NavLink></li>
+        {user && <li><NavLink className={({isActive})=> isActive? "border border-[#0056D2] !text-[#0056D2] rounded-none": "border border-transparent"} to="/profile"><RxAvatar /> My Profile</NavLink></li>
     }
         </>
     )
@@ -68,7 +67,7 @@ const Navbar = () => {
                 <span className="flex items-center gap-1">
                <img src={logo} alt="" className=" w-12" />
                <div className="flex flex-col">
-               <h2 className="font-bold text-lg">Coupon Oasis</h2>
+               <h2 className="font-bold text-lg">Discount pro</h2>
                <p className="text-xs">collect & save money</p>
                </div>
                 </span>
@@ -80,7 +79,7 @@ const Navbar = () => {
                 <span className="flex items-center gap-1">
                <img src={logo} alt="" className=" w-12" />
                <div className="flex flex-col">
-               <h2 className="font-bold text-lg">Coupon Oasis</h2>
+               <h2 className="font-bold text-lg">Discount pro</h2>
                <p className="text-xs">collect & save money</p>
                </div>
                 </span>
@@ -105,8 +104,12 @@ const Navbar = () => {
             <img className="w-10 h-10 rounded-full block ring z-10 " src={ photo ||  avatar}/>
              </div>
             </Link>}
-            {user && <h4 className="font-semibold ">Hi,{user?.displayName?.slice(0,7)}{user?.displayName?.length > 7 && ".." || firstName }</h4>}
-            {/* {user && user?.email && <span className="text-xs block">{user?.email}</span>} */}
+            {user && user.displayName?
+            ( <h4 className="font-semibold ">
+                Hi,{user.displayName.length > 7 ? `${user.displayName.slice(0,8)}..`  : user.displayName }</h4>) :
+                (firstName && <h4 className="font-semibold ">{firstName}</h4>)
+                }
+
             </div>
             <div className="flex items-center justify-end">
                 {! user? <>
@@ -114,7 +117,8 @@ const Navbar = () => {
                 {pathname === "/signup" ||<Link to="/signup" className=" ml-2 btn btn-outline hover:bg-amber-400 hover:border-amber-400 rounded-none text-white bg-[#0056D2]">Sign Up</Link>}
                 </> :
                 <>
-                <button onClick={signOutHandler} className=" ml-2 btn btn-outline hover:bg-amber-400 hover:border-amber-400 rounded-none text-white bg-[#0056D2]">Sign out </button>
+                <button onClick={signOutHandler} className=" sm:hidden ml-2 btn btn-sm btn-outline hover:bg-amber-400 hover:border-amber-400 rounded-none text-white bg-[#0056D2]"><IoLogOutSharp size={20} /></button>
+                <button onClick={signOutHandler} className="hidden sm:block ml-2 btn btn-outline hover:bg-amber-400 hover:border-amber-400 rounded-none text-white bg-[#0056D2]">Sign out </button>
                 </>
             }
             </div>

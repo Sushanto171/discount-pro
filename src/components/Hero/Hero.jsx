@@ -16,7 +16,7 @@ const Hero = () => {
     }
     return (
         <div className='bg-hero lg:bg-no-repeat overflow-hidden '>
-    <section className="w-10/12 mx-auto relative pt-10 pb-16">
+    <section className="md:w-10/12 mx-auto relative pt-10 pb-16">
         <div className="absolute inset-x-0 bottom-0 z-10 hidden lg:flex">
             <img className="hidden lg:block max-w-[600px]" src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/5/credit-cards.png" alt="" />
             <img className="block w-full lg:hidden" src="https://cdn.rareblocks.xyz/collection/celebration/images/hero/5/credit-cards-mobile.png" alt="" />
@@ -42,8 +42,8 @@ const Hero = () => {
                 </div>
                 <p className="mt-5 text-white opacity-80">Discover the best deals, discounts, and coupons to make your shopping smarter and more affordable. Start saving today!</p>
 
-                <button onClick={seeMoreHandler} to="/" className="w-44  items-center px-6 py-4 mt-8 font-bold text-black transition-all duration-200
-                 bg-amber-400 hover:bg-amber-500 rounded-lg sm:mt-16 focus:bg-amber-500  inline-block" role="button">
+                <button onClick={seeMoreHandler} to="/" className="w-44  items-center px-6 py-4 mt-8 font-bold text-black transition-all duration-200 rounded-none
+                 bg-amber-400 hover:bg-amber-500 sm:mt-16 focus:bg-amber-500  inline-block" role="button">
                     <div className="w-full h-full flex gap-2 hover:gap-4 duration-200">
                     <span>See More</span> 
                     <svg className="w-6 h-6 ml-4 -mr-2" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">

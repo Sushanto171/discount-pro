@@ -3,9 +3,10 @@ import { useContext, useState } from "react";
 import { AuthContext } from "../../Hooks/AuthContext";
 import { successAlert } from "../SuccessAlert/SuccessAlert";
 
+
 const ProfileUpdateForm = ({setProfileUpdateField}) => {
     const [typingName, setTypingName] = useState("");
-    const {updateUserProfile} = useContext(AuthContext);
+    const {updateUserProfile, } = useContext(AuthContext);
 
     const formHandler = (e) =>{
         e.preventDefault();
@@ -20,7 +21,6 @@ const ProfileUpdateForm = ({setProfileUpdateField}) => {
     })
     .catch(error => console.log(error.message))
     }
-
     return (
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow">
         <form onSubmit={formHandler} className="card-body">
@@ -38,7 +38,7 @@ const ProfileUpdateForm = ({setProfileUpdateField}) => {
             <input name="photo" type="text" placeholder="Photo url" className="input input-bordered" required />
           </div>
           <div className="form-control mt-6">
-            <button className="btn btn-primary">Update Profile</button>
+            <button className="btn text-white bg-[#0056D2] hover:bg-amber-400">Update Information</button>
           </div>
         </form>
       </div>

@@ -10,6 +10,7 @@ import Login from "../Pages/Login/Login";
 import SignUp from "../Pages/SignUp/SignUp";
 import PrivateRoute from './../PrivateRoute/PrivateRoute';
 import Brand from './../Pages/Brand/Brand';
+import ForgotPasswordForm from "../components/ForgotPasswordForm/ForgotPasswordForm";
 
 const router = createBrowserRouter([
     {
@@ -54,6 +55,11 @@ const router = createBrowserRouter([
         path: "/signup",
         element: <SignUp />
     },
+    {
+        path: "/forgotPasswordForm",
+        element: <ForgotPasswordForm />,
+        errorElement: <Error />
+    }
 ]);
 
 export default router;

@@ -5,6 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import BrandOnSell from "../../components/BrandOnSell/BrandOnSell";
 import HowItWorks from "../../components/HowItWorks/HowItWorks";
 import { AuthContext } from "../../Hooks/AuthContext";
+import StatisticsSection from "../../components/StatisticsSection/StatisticsSection";
 
 const Home = () => {
   const data = useLoaderData();
@@ -32,6 +33,8 @@ const Home = () => {
             {/* brand on sell */}
           <div className="col-span-8">
             <BrandOnSell isSellOn={isSellOn} />
+
+            <StatisticsSection />
           </div>
 
             <div className="col-span-4 overflow-hidden">

@@ -12,7 +12,8 @@ const AuthProvider = ({children }) => {
     const [lastName, setLastName] = useState("");
     const [photo, setPhoto] = useState("");
     const [loader, setLoader] = useState(true);
-    const [title, setTitle] = useState("Home")
+    const [title, setTitle] = useState("Home");
+    const emailRef = useRef();
 
     // providers
     const googleProvider = new GoogleAuthProvider();
@@ -20,7 +21,7 @@ const AuthProvider = ({children }) => {
 
     // 
     useEffect(()=>{
-        document.title = title + " | Coupon Oasis";
+        document.title = title + " | Discount pro";
     } ,[title]);
 
 
@@ -86,6 +87,8 @@ const updateUserProfile =(name, photo)=>{
         loader,
         setTitle,
         updateUserProfile,
+        setUser,
+        emailRef,
     }
     return (
        <AuthContext.Provider value={contextInfo}>

@@ -7,15 +7,14 @@ import { FcGoogle } from "react-icons/fc";
 import { useContext, useEffect, useRef, useState } from "react";
 import { AuthContext } from "../../Hooks/AuthContext";
 import Swal from "sweetalert2";
-import { successAlert } from "../../components/SuccessAlert/SuccessAlert";
+import { alertMessage, successAlert } from "../../components/SuccessAlert/SuccessAlert";
 
 const Login = () => {
     const [errorMessage, setErrorMessage] = useState("");
     const [passVisible, setPassVisible] = useState(false);
-    const { signInWithGoogle, signInUser, passwordRecovery, setTitle} = useContext(AuthContext);
+    const { signInWithGoogle, signInUser, setTitle, emailRef} = useContext(AuthContext);
     const navigate = useNavigate();
     const location = useLocation();
-    const emailRef = useRef();
     useEffect(() => {
         setTitle("Log in");
     }, [setTitle]);
@@ -47,40 +46,6 @@ const Login = () => {
     e.target.password.value = "";
        
     }
-
-    // forgot password
-    const forgotHandler =async (e)=>{
-        e.preventDefault();
-       const emailValue= emailRef.current.value
-       console.log( typeof emailValue)
-        setErrorMessage("");
-        const { value: email }  = await Swal.fire({
-            title: "Input email address",
-            input: "email",
-            inputLabel: "Your email address",
-            inputPlaceholder: "Enter your email address",
-            confirmButtonText: 'Reset password',
-            background: "black",
-            color: "white",
-            inputValue: emailValue,
-          });
-          if(email){
-            passwordRecovery(email)
-            .then(() =>{
-                Swal.fire({
-                    title: `Thank you!`,
-                    text: ` We've received your email: ${email}. Please check your inbox for further instructions.`,
-                    confirmButtonText: 'Continue',
-                    background: "black",
-                    color: "white"
-                  })
-            })
-            .catch(error => {
-                alertMessage(error.message, "error");
-            })
-          }
-    }
-
     const passwordVisibilityHandler =(e)=>{
         e.preventDefault();
         setPassVisible(!passVisible);
@@ -99,23 +64,6 @@ const Login = () => {
             setErrorMessage("");
            
         };
-
-        const alertMessage = (message, icon)=>{
-            Swal.fire({
-                title: `${message ==="Firebase: Error (auth/invalid-credential)." && "Invalid email or password" 
-                    || message === "Firebase: Error (auth/internal-error)." && "Connected failed. Check your mobile data or wifi connection."
-                    || message === "Firebase: Error (auth/network-request-failed)." && "Connected failed. Check your mobile data or wifi connection." || message} !`,
-                icon: icon,
-                confirmButtonText: 'Continue',
-                background: "black",
-              });
-            //   timeCounter();
-        };    
-               const timeCounter = ()=>{
-                setTimeout(()=>{
-                    Swal.close()	
-                },2000)
-            };
     return (
         <div className="">
             <Navbar />
@@ -150,7 +98,7 @@ const Login = () => {
                     <span className="label-text text-xs">Remember me</span>
                 </label>
                 <label className="label">
-                    <button onClick={forgotHandler} className="label-text-alt link link-hover">Forgot password?</button>
+                   <Link to='/forgotPasswordForm'> <button  className="label-text-alt link link-hover">Forgot password?</button></Link>
                 </label>
                     </div>
                 </div>
