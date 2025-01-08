@@ -95,7 +95,7 @@ const Navbar = () => {
             {user && user?.photoURL && <Link to="/profile" className="mr-2 shadow rounded-full">
             <div className="relative flex items-center justify-center">
             <span className="animate-ping absolute inline-flex h-8 w-8 rounded-full bg-sky-400 opacity-75 z-0"></span>
-            <img className="w-10 rounded-full block ring z-10" src={user?.photoURL}/>
+            <img className="w-10 h-10 rounded-full block ring z-10" src={user?.photoURL}/>
              </div>
             </Link>}
             {! user?.photoURL && user && <Link to="/profile" className="mr-2 shadow rounded-full">

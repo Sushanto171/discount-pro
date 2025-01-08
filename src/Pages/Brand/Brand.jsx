@@ -22,7 +22,6 @@ const Brand = () => {
     },[id]);
     
 const {brand_name, rating,  brand_logo, coupons, shop_Link, isSaleOn} = brand;
-// console.log({brand_name, rating, description, brand_logo, coupons, shop_Link, isSaleOn})
 useEffect(() => {
   setTitle(brand_name);
 }, [setTitle, brand_name]);

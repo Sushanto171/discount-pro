@@ -1,7 +1,7 @@
 /* eslint-disable react/prop-types */
 import { useContext, useState } from "react";
 import { AuthContext } from "../../Hooks/AuthContext";
-import { successAlert } from "../SuccessAlert/SuccessAlert";
+import { alertMessage, successAlert } from "../SuccessAlert/SuccessAlert";
 
 
 const ProfileUpdateForm = ({setProfileUpdateField}) => {
@@ -12,14 +12,14 @@ const ProfileUpdateForm = ({setProfileUpdateField}) => {
         e.preventDefault();
         const name = e.target.name.value;
         const photo= e.target.photo.value;
-        console.log({name, photo})
+
         //    update profile
         updateUserProfile(name, photo)
         .then(()=>{
         setProfileUpdateField(true);
         successAlert("Profile Update Success!");
     })
-    .catch(error => console.log(error.message))
+    .catch(error => alertMessage(error.message))
     }
     return (
         <div className="card bg-base-100 w-full max-w-sm shrink-0 shadow">
